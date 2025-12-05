@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Alamkrita Portal</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    header {
+      background: white;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .container {
+      padding: 40px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: white;
+      width: 250px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #333;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌟 Alamkrita Portal</div>
+    <button onclick="logout()" style="padding:8px 12px; border:none; border-radius:6px; cursor:pointer;">Logout</button>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>💰 Fees</h3>
+      <p>View pending fees & pay online</p>
+      <a href="fees.html">Go</a>
+    </div>
+
+    <div class="card">
+      <h3>🎭 Workshops</h3>
+      <p>Enroll in upcoming workshops</p>
+      <a href="workshops.html">Go</a>
+    </div>
+
+    <div class="card">
+      <h3>👗 Costumes</h3>
+      <p>Browse & rent costumes</p>
+      <a href="costumes.html">Go</a>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
+  <script>
+    // TODO: Replace with your real Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Redirect to login if not logged in
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+
+</body>
+</html>
